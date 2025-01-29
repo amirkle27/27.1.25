@@ -25,3 +25,7 @@ class NonActiveAccountError(Exception):
 class MaxNumberOfAccountsError(Exception):
     def __init__(self, error):
         super().__init__(error)
+
+class EmptyValueError(Exception):
+    def __init__(self,error):
+        super().__init__(error)
