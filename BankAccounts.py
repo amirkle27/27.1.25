@@ -65,7 +65,7 @@ class BankAccount:
         if start_balance < 0:
             raise DepositBelowZeroError("Start balance cannot be lower than 0}")
         if not self.__active:
-            raise NonActiveAccoutError("Attention! Account not active!")
+            raise NonActiveAccountError("Attention! Account not active!")
         self.__start_balance = start_balance
         BankAccount.last_operation_time = datetime.now()
 
@@ -88,7 +88,7 @@ Name: {self.__name}\nEmail: {self.__email}\nStart Balance: {self.__start_balance
         if amount < 0:
             raise DepositBelowZeroError("Deposit amount cannot be lower than 0")
         if not self.__active:
-            raise NonActiveAccoutError("Attention! Account not active!")
+            raise NonActiveAccountError("Attention! Account not active!")
         self.balance += amount
         if self.balance > BankAccount.max_balance:
             BankAccount.max_balance = self.balance
@@ -101,7 +101,7 @@ Name: {self.__name}\nEmail: {self.__email}\nStart Balance: {self.__start_balance
         if amount < 0:
             raise DepositBelowZeroError("Withdraw amount cannot be lower than 0")
         if not self.__active:
-            raise NonActiveAccoutError("Attention! Account not active!")
+            raise NonActiveAccountError("Attention! Account not active!")
         if self.balance < BankAccount.min_balance:
             BankAccount.min_balance = self.balance
         self.balance -= amount
@@ -112,26 +112,9 @@ Name: {self.__name}\nEmail: {self.__email}\nStart Balance: {self.__start_balance
 
     def close_account(self):
         if not self.__active:
-            raise NonActiveAccoutError("Account already closed")
+            raise NonActiveAccountError("Account already closed")
         BankAccount.balance_all_accounts -= self.balance
         self.balance = 0
         self.__active = False
         BankAccount.number_of_accounts -= 1
         BankAccount.last_operation_time = datetime.now()
-
-
-
-amir = BankAccount('amir','amirkle@gmail.com',27000.4)
-Gefen = BankAccount('gefen','gefen@wall.co.il', 2.2)
-gideon = BankAccount('gideon','gideon12@gmail.com', 450020.9)
-amir1 = BankAccount('amir','amirkle@gmail.com',27000.4)
-Gefen1 = BankAccount('gefen','gefen@wall.co.il', 2.2)
-gideon1 = BankAccount('gideon','gideon12gmail.com', 450020.9)
-
-
-print(amir.last_operation_time)
-
-amir.deposit(200000.0)
-print(BankAccount.min_balance)
-print(BankAccount.number_of_accounts)
-print(BankAccount.last_operation_time)
